@@ -1,23 +1,25 @@
-name: Sync DAGs to Server
+name: Deploy DAGs to Airflow Server
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main  # or whatever your main DAG branch is
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Sync DAGs via SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Sync DAGs to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }}
+          host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SERVER_PORT }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd ~/airflow-project/airflow-dags
             git pull origin main
-            cd ~/airflow-project
-            docker-compose restart
+            find . -name '*.py' -exec touch {} +
