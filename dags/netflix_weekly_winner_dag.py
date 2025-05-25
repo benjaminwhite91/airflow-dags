@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import os
-from etl.netflix.download_weekly_netflix import get_latest_netflix_weekly_data
+from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
 
 # Where you want to save it (can be a volume mount or external dir)
 DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data/netflix")
@@ -19,8 +19,8 @@ with DAG(
     dag_id="weekly_netflix_download",
     default_args=default_args,
     description="Download Netflix weekly TSV data",
-    schedule_interval="0 10 * * TUE"
-                      "",  # every Monday 10am
+    schedule_interval="0 20 * * 2"
+                      "",  # every TUES 8PM
     start_date=datetime(2024, 1, 1),
     catchup=False,
     tags=["netflix", "weekly"],
