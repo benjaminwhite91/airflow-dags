@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import os
-from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
+from dags import get_latest_netflix_weekly_data
 
 # Where you want to save it (can be a volume mount or external dir)
 DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data/netflix")

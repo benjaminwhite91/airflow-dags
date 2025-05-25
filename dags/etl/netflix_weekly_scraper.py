@@ -12,7 +12,7 @@ def get_latest_netflix_weekly_data(tsv_path: str, logger=print):
     logger("Downloading full weekly TSV data from Netflix...")
     response = requests.get(WEEKLY_TSV_URL)
     response.raise_for_status()
-
+zz
     df = pl.read_csv(StringIO(response.text), separator="\t", try_parse_dates=True)
 
     logger(f"Fetched {df.height} rows. Writing to {tsv_path}...")
