@@ -17,7 +17,7 @@ jobs:
         uses: burnett01/rsync-deployments@5.1
         with:
           switches: -avz --delete
-          path: airflow-dags/dags/
+          path: dags/
           remote_path: ~/airflow-project/airflow-dags/dags/
           remote_host: ${{ secrets.SERVER_HOST }}
           remote_user: ${{ secrets.SERVER_USER }}
