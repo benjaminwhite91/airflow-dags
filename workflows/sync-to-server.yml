@@ -3,7 +3,7 @@ name: Deploy DAGs to Airflow Server
 on:
   push:
     branches:
-      - main  # or whatever your main DAG branch is
+      - main
 
 jobs:
   deploy:
@@ -13,14 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Sync DAGs to server via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Sync DAGs to server via rsync
+        uses: burnett01/rsync-deployments@5.1
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SERVER_PORT }}
-          script: |
-            cd ~/airflow-project/airflow-dags
-            git pull origin main
-            find . -name '*.py' -exec touch {} +
+          switches: -avz --delete
+          path: airflow-dags/dags/
+          remote_path: ~/airflow-project/airflow-dags/dags/
+          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_user: ${{ secrets.SERVER_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          remote_port: ${{ secrets.SERVER_PORT }}
