@@ -7,7 +7,7 @@ WEEKLY_TSV_URL = "https://www.netflix.com/tudum/top10/data/all-weeks-countries.t
 
 
 def get_latest_netflix_weekly_data(tsv_path: str, logger=print):
-    """" This gets the weekly netflix data. It does a total overwrite because this data is small""""
+    """" This gets the weekly netflix data. It does a total overwrite because this data is small"""
 
     logger("Downloading full weekly TSV data from Netflix...")
     response = requests.get(WEEKLY_TSV_URL)
