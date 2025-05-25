@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 import os
 from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
 
-# Where you want to save it (can be a volume mount or external dir)
 DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data/netflix")
 os.makedirs(DATA_DIR, exist_ok=True)
 TSV_PATH = os.path.join(DATA_DIR, "weekly_netflix_top10.tsv")
