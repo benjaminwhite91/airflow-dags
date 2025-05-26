@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import os
-from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
+from dags.etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
 
 DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data/netflix")
 os.makedirs(DATA_DIR, exist_ok=True)
