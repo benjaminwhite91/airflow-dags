@@ -16,9 +16,9 @@ jobs:
       - name: Sync DAGs to server via rsync
         uses: burnett01/rsync-deployments@5.1
         with:
-          switches: -avz --delete
-          path: dags/
-          remote_path: ~/airflow-project/airflow-dags/dags/
+          switches: -avz --delete --exclude='.github'
+          path: airflow-dags/
+          remote_path: ~/airflow-project/airflow-dags/
           remote_host: ${{ secrets.SERVER_HOST }}
           remote_user: ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
