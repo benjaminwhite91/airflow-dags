@@ -1,5 +1,7 @@
+#ETL Core Libraries
 polars
 requests
 beautifulsoup4
+
+#Auxiliaries
 python-dotenv
-pandas
