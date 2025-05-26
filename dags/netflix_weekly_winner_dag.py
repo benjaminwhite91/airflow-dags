@@ -18,8 +18,7 @@ with DAG(
     dag_id="weekly_netflix_download",
     default_args=default_args,
     description="Download Netflix weekly TSV data",
-    schedule_interval="0 20 * * 2"
-                      "",  # every TUES 8PM
+    schedule_interval="0 20 * * 2",
     start_date=datetime(2024, 1, 1),
     catchup=False,
     tags=["netflix", "weekly"],
