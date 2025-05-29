@@ -19,7 +19,7 @@ jobs:
           switches: -avz --delete --exclude='.github'
           path: ./
           remote_path: ~/airflow-project/airflow-dags/
-          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_host: launchpadanalytics.duckdns.org
           remote_user: ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
           remote_port: ${{ secrets.SERVER_PORT }}
