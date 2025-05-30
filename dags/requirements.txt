@@ -1,5 +1,5 @@
 #ETL Core Libraries
-polars
+polars-lts-cpu
 requests
 beautifulsoup4
 
