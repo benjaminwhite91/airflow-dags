@@ -18,7 +18,7 @@ jobs:
         with:
           switches: -avz --delete --exclude='.github'
           path: ./
-          remote_path: ~/airflow-project/airflow-dags/
+          remote_path: ~/airflow-project/dags/
           remote_host: 173.56.111.82
           remote_user: ${{ secrets.SERVER_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
