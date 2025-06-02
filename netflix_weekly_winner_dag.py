@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 import os
 from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
 
-DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data/netflix")
+BASE_DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data")
+DATA_DIR = os.path.join(BASE_DATA_DIR, "netflix", "raw")
 os.makedirs(DATA_DIR, exist_ok=True)
 TSV_PATH = os.path.join(DATA_DIR, "weekly_netflix_top10.tsv")
 
