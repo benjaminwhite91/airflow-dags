@@ -19,3 +19,4 @@ def get_latest_netflix_weekly_data(tsv_path: str, logger=print):
     df.write_csv(tsv_path, separator="\t")
 
     logger("Raw Netflix weekly TSV successfully saved.")
+    #test
