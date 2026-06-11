@@ -2,6 +2,12 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 import os
+import sys
+
+# Airflow only puts the dags/ folder on sys.path, not the project root,
+# so add the project root so `etl` (a sibling of dags/) is importable.
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
 from etl.netflix_weekly_scraper import get_latest_netflix_weekly_data
 
 BASE_DATA_DIR = os.getenv("DATA_DIR", "/opt/airflow/data")
