@@ -19,12 +19,26 @@ jobs:
           tags: tag:ci
           ping: ${{ secrets.REMOTE_HOST }}
 
-      - name: Sync DAGs to server via rsync
+      # Code-only deploy: sync just the application code (dags/ and etl/).
+      # No --delete, and runtime files managed on the host
+      # (docker-compose.yaml, .env, config/, data/, logs/) are never touched.
+      - name: Sync dags/ to server
         uses: burnett01/rsync-deployments@5.1
         with:
-          switches: -avz --delete --exclude='.github'
-          path: ./
-          remote_path: ~/airflow-project/
+          switches: -avz
+          path: dags/
+          remote_path: ~/airflow-project/dags/
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key:  ${{ secrets.REMOTE_KEY }}
+          remote_port: ${{ secrets.REMOTE_PORT }}
+
+      - name: Sync etl/ to server
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avz
+          path: etl/
+          remote_path: ~/airflow-project/etl/
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key:  ${{ secrets.REMOTE_KEY }}
